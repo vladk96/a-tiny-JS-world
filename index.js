@@ -8,6 +8,58 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
+const man = {
+    species: 'human',
+    name: 'Denis',
+    gender: 'male',
+    legs: 2,
+    hands: 2,
+    saying: 'Hi! How are you?',
+}
+
+const woman = {
+    species: 'human',
+    name: 'Alice',
+    gender: 'female',
+    legs: 2,
+    hands: 2,
+    saying: 'Hello! How are you?',
+}
+
+const cat = {
+    species: 'cat',
+    name: 'Molly',
+    gender: 'female',
+    legs: 4,
+    hands: 0,
+    saying: 'Meooow!',
+}
+
+const tiger = {
+    species: 'cat',
+    name: 'Shere Khan',
+    gender: 'male',
+    legs: 4,
+    hands: 0,
+    saying: 'Grrr.',
+}
+
+const dog = {
+    species: 'dog',
+    name: 'Rex',
+    gender: 'male',
+    legs: 4,
+    hands: 0,
+    saying: 'Woof!',
+}
+
+const toPrettyString = (obj) => {
+    return `Species: ${obj['species']}; name: ${obj['name']}; gender: ${obj['gender']}; legs: ${obj['legs']}; hands: ${obj['hands']}; saying: ${obj['saying']};`;
+}
+
+[man, woman, cat, tiger, dog].forEach((element) => {
+    print(toPrettyString(element));
+});
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
