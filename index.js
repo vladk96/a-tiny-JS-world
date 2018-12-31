@@ -8,56 +8,62 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-const man = {
-    species: 'human',
-    name: 'Denis',
-    gender: 'male',
-    legs: 2,
-    hands: 2,
-    saying: 'Hi! How are you?',
+function Creature (name, gender) {
+    this.name = name;
+    this.gender = gender;
+    this.saying = null;
 }
 
-const woman = {
-    species: 'human',
-    name: 'Alice',
-    gender: 'female',
-    legs: 2,
-    hands: 2,
-    saying: 'Hello! How are you?',
+Creature.prototype.say = function (text) {
+    this.saying = text;
+}
+Creature.prototype.getElement = function (propertyName) {
+    return this[propertyName];
 }
 
-const cat = {
-    species: 'cat',
-    name: 'Molly',
-    gender: 'female',
-    legs: 4,
-    hands: 0,
-    saying: 'Meooow!',
+function Cat () {
+    Creature.apply(this, arguments);
 }
 
-const tiger = {
-    species: 'cat',
-    name: 'Shere Khan',
-    gender: 'male',
-    legs: 4,
-    hands: 0,
-    saying: 'Grrr.',
+Cat.prototype = Object.create(Creature.prototype);
+Cat.prototype.constructor = Cat;
+Cat.prototype.species = "Cat";
+Cat.prototype.legs = 4;
+Cat.prototype.hands = 0;
+
+function Human () {
+    Creature.apply(this, arguments);
 }
 
-const dog = {
-    species: 'dog',
-    name: 'Rex',
-    gender: 'male',
-    legs: 4,
-    hands: 0,
-    saying: 'Woof!',
-}
+Human.prototype = Object.create(Creature.prototype);
+Human.prototype.constructor = Human;
+Human.prototype.species = "Human";
+Human.prototype.legs = 2;
+Human.prototype.hands = 2;
 
 const toPrettyString = (obj) => {
-    return `Species: ${obj['species']}; name: ${obj['name']}; gender: ${obj['gender']}; legs: ${obj['legs']}; hands: ${obj['hands']}; saying: ${obj['saying']};`;
+    return [
+        `Species: ${obj.getElement('species')}`,
+        `name: ${obj.getElement('name')}`,
+        `gender: ${obj.getElement('gender')}`,
+        `legs: ${obj.getElement('legs')}`,
+        `hands: ${obj.getElement('hands')}`,
+        `saying: ${obj.getElement('saying')}`,
+    ].join('; ');
 }
 
-[man, woman, cat, tiger, dog].forEach((element) => {
+const cat = new Cat('Mark', 'male');
+
+const cat1 = new Cat('Molly', 'female');
+cat1.say('Meow');
+
+const human = new Human('Vlad', 'male');
+human.say('Hi!');
+
+const human1 = new Human('Olya', 'female');
+human1.say('Hello!');
+
+[cat, cat1, human, human1].forEach((element) => {
     print(toPrettyString(element));
 });
 
